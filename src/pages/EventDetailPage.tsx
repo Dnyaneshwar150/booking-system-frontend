@@ -56,7 +56,7 @@ export default function EventDetailPage() {
       setReservationId(res.data.data.reservationId);
       setExpiresAt(res.data.data.expiresAt);
       // Get seat numbers from selected IDs
-      const nums = detail?.seats.filter((s) => seatIds.includes(s._id)).map((s) => s.seatNumber) ?? [];
+      const nums = detail?.seats.filter((s) => seatIds.includes(s.id)).map((s) => s.seatNumber) ?? [];
       setReservedSeatNumbers(nums);
       setStep('confirm');
     } catch (err: unknown) {
@@ -118,9 +118,9 @@ export default function EventDetailPage() {
         >
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
-            style={{ background: 'rgba(16,185,129,0.15)', border: '2px solid #10b981' }}
+            style={{ background: 'rgba(45, 138, 78, 0.1)', border: '2px solid #2d8a4e' }}
           >
-            <CheckCircle2 size={32} style={{ color: '#10b981' }} />
+            <CheckCircle2 size={32} style={{ color: '#2d8a4e' }} />
           </div>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '0.5rem' }}>
             Booking Confirmed!
@@ -130,7 +130,7 @@ export default function EventDetailPage() {
           </p>
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {reservedSeatNumbers.map((s) => (
-              <span key={s} style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', color: '#10b981', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.85rem', fontWeight: 600 }}>
+              <span key={s} style={{ background: 'rgba(45, 138, 78, 0.1)', border: '1px solid rgba(45, 138, 78, 0.25)', color: '#2d8a4e', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.85rem', fontWeight: 600 }}>
                 {s}
               </span>
             ))}
@@ -162,15 +162,15 @@ export default function EventDetailPage() {
           {/* Reservation info */}
           <div
             className="rounded-xl p-4 mb-5"
-            style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)' }}
+            style={{ background: 'rgba(183, 121, 31, 0.08)', border: '1px solid rgba(183, 121, 31, 0.2)' }}
           >
-            <div className="flex items-center gap-2 mb-2" style={{ color: '#f59e0b', fontSize: '0.85rem', fontWeight: 600 }}>
+            <div className="flex items-center gap-2 mb-2" style={{ color: 'var(--color-warning)', fontSize: '0.85rem', fontWeight: 600 }}>
               <Clock size={14} />
               Seats Reserved — Expires at {expiresDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
             </div>
             <div className="flex flex-wrap gap-2">
               {reservedSeatNumbers.map((s) => (
-                <span key={s} style={{ background: 'rgba(245,158,11,0.15)', color: '#f59e0b', padding: '0.15rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.8rem', fontWeight: 700 }}>
+                <span key={s} style={{ background: 'rgba(183, 121, 31, 0.1)', color: 'var(--color-warning)', padding: '0.15rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.8rem', fontWeight: 700 }}>
                   {s}
                 </span>
               ))}
@@ -178,7 +178,7 @@ export default function EventDetailPage() {
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 rounded-lg p-3 mb-4" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#ef4444', fontSize: '0.85rem' }}>
+            <div className="flex items-center gap-2 rounded-lg p-3 mb-4" style={{ background: 'rgba(197, 48, 48, 0.08)', border: '1px solid rgba(197, 48, 48, 0.2)', color: 'var(--color-error)', fontSize: '0.85rem' }}>
               <AlertCircle size={15} />
               {error}
             </div>
@@ -241,9 +241,7 @@ export default function EventDetailPage() {
       {/* Event Header */}
       <section
         style={{
-          background: event.posterUrl
-            ? `linear-gradient(to bottom, rgba(10,11,15,0.6) 0%, rgba(10,11,15,0.95) 100%), url(${event.posterUrl}) center/cover`
-            : 'linear-gradient(135deg, rgba(79,110,247,0.08) 0%, rgba(139,92,246,0.06) 100%)',
+          background: 'linear-gradient(180deg, var(--color-surface-2) 0%, transparent 100%)',
           borderBottom: '1px solid var(--color-border)',
           padding: '2rem 0',
         }}
@@ -265,7 +263,7 @@ export default function EventDetailPage() {
                 <img
                   src={event.posterUrl}
                   alt={event.name}
-                  style={{ width: '120px', borderRadius: '0.75rem', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', display: 'block' }}
+                  style={{ width: '120px', borderRadius: '0.75rem', boxShadow: '0 8px 24px rgba(26,26,26,0.12)', display: 'block' }}
                 />
               </div>
             )}
@@ -300,7 +298,7 @@ export default function EventDetailPage() {
         <div className="section-container mt-4">
           <div
             className="flex items-center gap-2 rounded-xl p-4"
-            style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#ef4444', fontSize: '0.875rem' }}
+            style={{ background: 'rgba(197, 48, 48, 0.08)', border: '1px solid rgba(197, 48, 48, 0.2)', color: 'var(--color-error)', fontSize: '0.875rem' }}
           >
             <AlertCircle size={15} />
             {error}
@@ -313,11 +311,11 @@ export default function EventDetailPage() {
         <div className="section-container mt-4">
           <div
             className="flex items-center gap-2 rounded-xl p-4"
-            style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.25)', color: '#f59e0b', fontSize: '0.875rem' }}
+            style={{ background: 'rgba(183, 121, 31, 0.08)', border: '1px solid rgba(183, 121, 31, 0.25)', color: 'var(--color-warning)', fontSize: '0.875rem' }}
           >
             <AlertCircle size={15} />
             Please{' '}
-            <a href="/login" style={{ color: '#f59e0b', fontWeight: 700 }}>sign in</a>
+            <a href="/login" style={{ color: 'var(--color-warning)', fontWeight: 700 }}>sign in</a>
             {' '}to reserve seats.
           </div>
         </div>

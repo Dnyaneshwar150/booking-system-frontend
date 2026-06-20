@@ -44,8 +44,8 @@ export default function LoginPage() {
           position: 'fixed', inset: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none',
         }}
       >
-        <div style={{ position: 'absolute', top: '-20%', left: '30%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(79,110,247,0.12) 0%, transparent 70%)', filter: 'blur(40px)' }} />
-        <div style={{ position: 'absolute', bottom: '-10%', right: '20%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '30%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(26,26,26,0.03) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', right: '20%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(107,107,107,0.02) 0%, transparent 70%)', filter: 'blur(40px)' }} />
       </div>
 
       <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '420px' }}>
@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div className="flex flex-col items-center mb-8">
           <div
             className="w-14 h-14 rounded-2xl gradient-brand flex items-center justify-center mb-4"
-            style={{ boxShadow: '0 8px 32px rgba(79, 110, 247, 0.45)' }}
+            style={{ boxShadow: '0 8px 24px rgba(26, 26, 26, 0.15)' }}
           >
             <Ticket size={28} className="text-white" />
           </div>
@@ -61,7 +61,7 @@ export default function LoginPage() {
             Welcome back
           </h1>
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
-            Sign in to your SortMyScene account
+            Sign in to your account
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function LoginPage() {
           {error && (
             <div
               className="flex items-center gap-2 rounded-lg p-3 mb-5"
-              style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', color: '#ef4444', fontSize: '0.85rem' }}
+              style={{ background: 'rgba(197, 48, 48, 0.08)', border: '1px solid rgba(197, 48, 48, 0.2)', color: 'var(--color-error)', fontSize: '0.85rem' }}
             >
               <AlertCircle size={15} />
               {error}

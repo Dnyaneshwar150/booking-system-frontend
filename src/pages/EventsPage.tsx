@@ -51,7 +51,7 @@ export default function EventsPage() {
       {/* Hero header */}
       <section
         style={{
-          background: 'linear-gradient(180deg, rgba(79,110,247,0.08) 0%, transparent 100%)',
+          background: 'linear-gradient(180deg, var(--color-surface-2) 0%, transparent 100%)',
           borderBottom: '1px solid var(--color-border)',
           padding: '3rem 0 2rem',
         }}
@@ -150,7 +150,7 @@ export default function EventsPage() {
         ) : error ? (
           <div className="flex flex-col items-center justify-center py-24 gap-3">
             <div style={{ fontSize: '3rem' }}>⚠️</div>
-            <p style={{ color: '#ef4444', fontSize: '0.9rem', textAlign: 'center' }}>{error}</p>
+            <p style={{ color: 'var(--color-error)', fontSize: '0.9rem', textAlign: 'center' }}>{error}</p>
             <button onClick={() => void loadEvents()} className="btn-outline" style={{ marginTop: '0.5rem' }}>
               Try Again
             </button>

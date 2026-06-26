@@ -43,7 +43,6 @@ export default function SeatPicker({
   }, [seats, rows]);
 
   const [seatGrid, setSeatGrid] = useState<SeatState[][]>(grid);
-  console.log(seatGrid);
   const [selectedSeats, setSelectedSeats] = useState<SeatState[]>([]);
 
   const handleSeatClick = useCallback(
@@ -115,13 +114,67 @@ export default function SeatPicker({
     setSelectedSeats([]);
   };
 
-  const reverseSeatGrid = [...seatGrid].reverse();
-
-  console.log("reverse", reverseSeatGrid);
-
   return (
     <div className='flex flex-col gap-6'>
       {/* Stage indicator */}
+
+      {/* Seat Grid */}
+      <section className='overflow-x-auto'>
+        <div className='inline-block min-w-max mx-auto'>
+          {seatGrid.map((row, rowIdx) => {
+            const rowLabel = String.fromCharCode(65 + rowIdx);
+            return (
+              <div
+                key={rowIdx}
+                className='flex items-center gap-2 mb-1'
+              >
+                {/* Row label */}
+                <span
+                  className='w-6 text-center text-xs font-bold text-muted shrink-0'
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {rowLabel}
+                </span>
+
+                {/* Seats with aisle gap */}
+                <div className='flex items-center gap-1'>
+                  {Array.from({ length: seatsPerRow }).map((_, colIdx) => {
+                    const seat = row[colIdx];
+                    return (
+                      <div
+                        key={colIdx}
+                        className='flex items-center'
+                      >
+                        {colIdx === aislePosition && (
+                          <div className='w-6 shrink-0' />
+                        )}
+                        <button
+                          onClick={() => handleSeatClick(rowIdx, colIdx)}
+                          disabled={seat?.status !== "available"}
+                          title={
+                            seat
+                              ? `${seat.seatNumber} — ${
+                                  SEAT_STYLES[seat.type]?.label ?? seat.type
+                                } — ₹${seat.price}`
+                              : ""
+                          }
+                          className='w-8 h-8 rounded-t-sm text-xs font-bold flex items-center justify-center transition-all shrink-0 outline-none'
+                          style={{
+                            fontSize: "0.6rem",
+                            ...getSeatStyle(seat),
+                          }}
+                        >
+                          {colIdx + 1}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       <section>
         <div
@@ -137,65 +190,6 @@ export default function SeatPicker({
         >
           Event Stage
         </p>
-      </section>
-      {/* Seat Grid */}
-      <section className='overflow-x-auto'>
-        <div className='flex justify-center'>
-          <div className='inline-block min-w-max mx-auto'>
-            {reverseSeatGrid.map((row, rowIdx) => {
-              const rowLabel = String.fromCharCode(65 + rowIdx);
-              return (
-                <div
-                  key={rowIdx}
-                  className='flex items-center gap-2 mb-1'
-                >
-                  {/* Row label */}
-                  <span
-                    className='w-6 text-center text-xs font-bold text-muted shrink-0'
-                    style={{ color: "var(--color-text-muted)" }}
-                  >
-                    {rowLabel}
-                  </span>
-
-                  {/* Seats with aisle gap */}
-                  <div className='flex items-center gap-1'>
-                    {Array.from({ length: seatsPerRow }).map((_, colIdx) => {
-                      const seat = row[colIdx];
-                      return (
-                        <div
-                          key={colIdx}
-                          className='flex items-center'
-                        >
-                          {colIdx === aislePosition && (
-                            <div className='w-6 shrink-0' />
-                          )}
-                          <button
-                            onClick={() => handleSeatClick(rowIdx, colIdx)}
-                            disabled={seat?.status !== "available"}
-                            title={
-                              seat
-                                ? `${seat.seatNumber} — ${
-                                    SEAT_STYLES[seat.type]?.label ?? seat.type
-                                  } — ₹${seat.price}`
-                                : ""
-                            }
-                            className='w-8 h-8 rounded-t-sm text-xs font-bold flex items-center justify-center transition-all shrink-0 outline-none'
-                            style={{
-                              fontSize: "0.6rem",
-                              ...getSeatStyle(seat),
-                            }}
-                          >
-                            {colIdx + 1}
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </section>
 
       {/* Legend */}
